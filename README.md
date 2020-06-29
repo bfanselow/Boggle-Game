@@ -9,7 +9,7 @@
  * Add enforcement of not using the same letter multiple times in same word.
  * Add a three-minute timer (started in separate thread) at start of new game.
 
-
+---
 #### Two types of usage modes:
   1) Interactive CLI
 ```
@@ -31,12 +31,15 @@
      # board letters back into a new board creation: bb = BoggleGame(letters=bb.letters)
 ```
 
+---
 
 Uses  **www.dictionaryapi.com/api/v3/references/collegiate/json/** to validate that a played word is a valid dictionary word before trying to find it on board.
 
 Requires API-KEY from **www.dictionaryapi.com**. 
 
 Store API-KEY in local filename: ".dictapikey"
+
+---
 
 ```
 >>>
