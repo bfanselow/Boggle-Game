@@ -28,7 +28,7 @@
      game = BoggleGame(board=bb)  <-- use this data for game
      ...
      # rather than keeping a boggle-board in memory, you can just recreate it by
-     # board letters back into a new board creation: bb = BoggleGame(letters=bb.letters)
+     # putting same board letters back into a new board creation: bb = BoggleGame(letters=bb.letters)
 ```
 
 ---
@@ -181,4 +181,38 @@ Enter a playable word...  Enter QUIT to stop
 QUIT
 
 Thanks for playing!
+```
+
+---
+
+```
+>>> from boggle import BoggleGame
+>>> game = BoggleGame()
+>>> game.board.show()
+-------------------
+|  t  t  r  t  g  |
+|  a  h  d  i  i  |
+|  a  h  i  y  p  |
+|  u  e  a  e  h  |
+|  a  n  n  r  i  |
+-------------------
+>>> game.board.letters
+'ttrtgahdiiahiypueaehannri'
+>>> game = BoggleGame(letters=game.board.letters)
+>>> game.board.show()
+-------------------
+|  t  t  r  t  g  |
+|  a  h  d  i  i  |
+|  a  h  i  y  p  |
+|  u  e  a  e  h  |
+|  a  n  n  r  i  |
+-------------------
+>>> game = BoggleGame(letters='qwertyuiopasdfgh')
+>>> game.board.show()
+----------------
+|  q  w  e  r  |
+|  t  y  u  i  |
+|  o  p  a  s  |
+|  d  f  g  h  |
+----------------
 ```
