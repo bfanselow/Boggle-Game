@@ -27,6 +27,7 @@
 ```
 
 
-Uses  **https://www.dictionaryapi.com/api/v3/references/collegiate/json/<word>?key=<api-key>** to validate that a played word is a valid dictionary word before trying to find it on board.
+Uses  **https://www.dictionaryapi.com/api/v3/references/collegiate/json/\<word\>?key=\<api-key\>** to validate that a played word is a valid dictionary word before trying to find it on board.
 
-Requires API-KEY from www.dictionaryapi.com. Store API-KEY in local filename: ".dictapikey"
+Requires API-KEY from **www.dictionaryapi.com**. 
+Store API-KEY in local filename: ".dictapikey"
