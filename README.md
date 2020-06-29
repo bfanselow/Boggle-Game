@@ -17,6 +17,15 @@
        >>> from boggle import BoggleGame
        >>> bgame = BoggleGame()
        >>> bgame.play()
+      
+       OR SPECIFY DIMENSION (default: 5x5) 
+       >>> bgame = BoggleGame(size=4)
+       >>> bgame.play()
+        
+       OR SPECIFY LETTERS (default: chosen from wweighted random-choice)
+       >>> bgame = BoggleGame(letters='qazxswedcvfrtgbnhytgfcpod')
+       >>> bgame.play()
+
 ```
 
   2) Use BoggleBoard() and BoggleGame() objects to populate a UI-based game
