@@ -92,31 +92,92 @@ SCORED-WORDS:
 |  g  v  s  t  i  |
 -------------------
 Enter a playable word...  Enter QUIT to stop
-give
-"give" is not a playable word
-CURRENT SCORE: 11
-SCORED-WORDS:
-{'who': 5, 'lint': 6}
+QUIT
+
+Thanks for playing!
+```
+---
+
+```
+>>> from boggle import BoggleGame
+>>> game = BoggleGame()
+>>> game.play()
 -------------------
-|  e  i  r  i  n  |
-|  c  t  s  d  t  |
-|  h  o  e  l  e  |
-|  w  i  i  n  h  |
-|  g  v  s  t  i  |
+|  e  t  h  r  t  |
+|  n  n  r  c  g  |
+|  m  d  l  i  u  |
+|  a  b  m  o  r  |
+|  e  t  t  u  a  |
+-------------------
+Enter a playable word...  Enter QUIT to stop
+ten
+"ten" is playable
+CURRENT SCORE: 5
+SCORED-WORDS:
+{'ten': 5}
+-------------------
+|  e  t  h  r  t  |
+|  n  n  r  c  g  |
+|  m  d  l  i  u  |
+|  a  b  m  o  r  |
+|  e  t  t  u  a  |
+-------------------
+Enter a playable word...  Enter QUIT to stop
+tenm
+"tenm" is NOT playable
+"tenm" is not in dictionary
+CURRENT SCORE: 5
+SCORED-WORDS:
+{'ten': 5}
+-------------------
+|  e  t  h  r  t  |
+|  n  n  r  c  g  |
+|  m  d  l  i  u  |
+|  a  b  m  o  r  |
+|  e  t  t  u  a  |
+-------------------
+Enter a playable word...  Enter QUIT to stop
+tenth
+"tenth" is playable
+CURRENT SCORE: 13
+SCORED-WORDS:
+{'ten': 5, 'tenth': 8}
+-------------------
+|  e  t  h  r  t  |
+|  n  n  r  c  g  |
+|  m  d  l  i  u  |
+|  a  b  m  o  r  |
+|  e  t  t  u  a  |
+-------------------
+Enter a playable word...  Enter QUIT to stop
+month
+"month" is NOT playable
+"month" cannot be made on this board
+CURRENT SCORE: 13
+SCORED-WORDS:
+{'ten': 5, 'tenth': 8}
+-------------------
+|  e  t  h  r  t  |
+|  n  n  r  c  g  |
+|  m  d  l  i  u  |
+|  a  b  m  o  r  |
+|  e  t  t  u  a  |
+-------------------
+Enter a playable word...  Enter QUIT to stop
+bad
+"bad" is playable
+CURRENT SCORE: 18
+SCORED-WORDS:
+{'ten': 5, 'tenth': 8, 'bad': 5}
+-------------------
+|  e  t  h  r  t  |
+|  n  n  r  c  g  |
+|  m  d  l  i  u  |
+|  a  b  m  o  r  |
+|  e  t  t  u  a  |
 -------------------
 Enter a playable word...  Enter QUIT to stop
 QUIT
-"QUIT" is not a playable word
-CURRENT SCORE: 11
-SCORED-WORDS:
-{'who': 5, 'lint': 6}
--------------------
-|  e  i  r  i  n  |
-|  c  t  s  d  t  |
-|  h  o  e  l  e  |
-|  w  i  i  n  h  |
-|  g  v  s  t  i  |
--------------------
 
 Thanks for playing!
 ```

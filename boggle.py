@@ -281,41 +281,62 @@ class BoggleGame():
         """Start a CLI interactive game. Seek input from user and exucte play_word()
            Keep track of score. Re-display board on each move.
         """
+        active = 1
         word = None
         self.board.show()
-        while word != 'QUIT':
-            word = input("Enter a playable word...  Enter QUIT to stop\n")
-            d_result = self.play_word(word.strip())
-            if not d_result:
-                print("\"%s\" is not a playable word" % (word))
+
+        while active:
+            word = input("Enter a playable word...  Enter QUIT to stop\n").strip()
+            if word == 'QUIT':
+                print("\nThanks for playing!")
+                sys.exit(0)
+            d_results = self.play_word(word.strip())
+            status = d_results.get('status', 0)
+            error = d_results.get('error', None)
+            if status: 
+                print("\"%s\" is playable" % (word))
+            else:
+                print("\"%s\" is NOT playable" % (word))
+                if error: 
+                    print(error)
+                
             score = self.current_score()
             print("CURRENT SCORE: %d\nSCORED-WORDS:\n%s" % (score, self.scored_words))
             self.board.show()
-        print("\nThanks for playing!")
-        sys.exit(0)
 
 
     def play_word(self, word):
         """Identify if the passed word is "playable" (valid word and on board). If it is,
            add the word to the self.scored_words attribute.
            Params: (str) word text
-           Returns: (dict) word and corresponding score for word. Score is None (not zero) if NOT a playable word.
+           Returns: (dict) results
+             * if word is a valid, playable word, results dict:     { "status": 1, "word": "<word>", "score": <score> }
+             * if word is a NOT valid, playable word, results dict: { "status": 0, "word": "<word>", "error": <error? }
         """
-        self.dprint(1, "Checking if word is playable: [%s]" % (word))
-        if not self.is_playable_word(word):
-            self.dprint(1, "\"%s\" is not a valid Boggle word" % (word))
-            return None
 
-        self.dprint(1, "Checking if word is on board: [%s]" % (word))
+        self.dprint(1, "Checking if word is valid Boggle word: [%s]" % (word))
+        if not self.is_playable_word(word):
+            error = "\"%s\" is not a valid Boggle word" % (word)
+            self.dprint(2, error)
+            return {"status": 0, "word": word, "error": error}
+        
+        self.dprint(1, "Checking if word is in dictionary: [%s]" % (word))
+        if not self.is_in_dictionary(word):
+            error = "\"%s\" is not in dictionary" % (word)
+            self.dprint(2, error)
+            return {"status": 0, "word": word, "error": error}
+
+        self.dprint(1, "Checking if word can be made board: [%s]" % (word))
         if self.check_word_on_board(word):
             score = word_length_score.get(len(list(word)), None)
             if not score:
                 score = max_score
             self.scored_words[word] = score
-            return { word: score }
+            return {"status": 1, "word": word, "score": score}
         else:
-            self.dprint(1, "\"%s\" is not playable on this board" % (word))
-            return None
+            error = "\"%s\" cannot be made on this board" % (word)
+            self.dprint(2, error)
+            return {"status": 0, "word": word, "error": error}
 
 
     def play_word_list(self, word_list):
@@ -362,6 +383,8 @@ class BoggleGame():
                  position is present on the board.
            Params: (list) letter list - remaining letters to check for neighboring connection.
            Returns: (bool) status of "boggle string" (i.e. all letters in list are touching)
+
+           TODO: cannot use the same letter multiple times in same word
         """
         current_letter = letter_list.pop(0)
         next_letter = letter_list[0] # since we popped, i=0 is "next" letter
@@ -384,12 +407,14 @@ class BoggleGame():
     def is_playable_word(self, word):
         """Identify if the passed word is a "playable" word according to
            Boggle rules:
-            * first see if the word is a valid English word.
+            * is string
+            * is 2-or-more-letters 
             * discard Proper pronouns
+            * other rules?
            Params: (str) word text
            Returns: (bool) status of playable word (True|False)
 
-           ## TODO: fill out last check according to Boggle rules
+           ## TODO: fill this method out according to Boggle rules
         """
         status = True
         # is string?
@@ -400,16 +425,12 @@ class BoggleGame():
         if len(list(word)) < 2:
             status = False
 
-        status = self.__is_in_dictionary(word) 
-        if not status:
-            self.dprint(1, "Word (%s) not found in dictionary" % (word) )
-
-        # is valid Boggle word? # Filter pronouns etc.
+        # Filter pronouns etc.
 
         return status
    
  
-    def __is_in_dictionary(self, word):
+    def is_in_dictionary(self, word):
         """Identify if the passed word is a word in the English dictionary 
            Params: (str) word text
            Returns: (bool) status of dictionary lookup (True|False)
@@ -437,7 +458,6 @@ class BoggleGame():
 
     def __load_dict_api_key(self):
         """Read credentials to retrieve API key"""
-        ...
         with open(DICT_API_KEY_FILE, "r") as file:
             api_key = file.readline()
         return api_key.strip() 
