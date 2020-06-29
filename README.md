@@ -42,7 +42,6 @@ Store API-KEY in local filename: ".dictapikey"
 ---
 
 ```
->>>
 >>> from boggle import BoggleBoard, BoggleGame
 >>> bb = BoggleBoard()
 >>> bb.show()
@@ -69,6 +68,7 @@ Store API-KEY in local filename: ".dictapikey"
 -------------------
 Enter a playable word...  Enter QUIT to stop
 lint
+"lint" is playable
 CURRENT SCORE: 6
 SCORED-WORDS:
 {'lint': 6}
@@ -81,6 +81,7 @@ SCORED-WORDS:
 -------------------
 Enter a playable word...  Enter QUIT to stop
 who
+"who" is playable
 CURRENT SCORE: 11
 SCORED-WORDS:
 {'who': 5, 'lint': 6}
